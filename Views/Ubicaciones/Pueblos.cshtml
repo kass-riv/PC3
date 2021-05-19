@@ -1,0 +1,38 @@
+@model List<Pueblo>
+
+
+<h1>Lista de pueblos</h1>
+
+<table class="table border">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Region</th>
+        <th>Operaciones</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Nombre</td>
+            <td>
+                @item.Region.Nombre
+            </td>
+            <td>
+                <a href="/ubicaciones/editarregion/@item.Id" class="btn btn-secondary">Editar</a>
+
+                <form action="/ubicaciones/borrarregion" method="post" class="d-inline-block">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button class="btn btn-danger">Borrar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    @if (Model.Count == 0) {
+        <tr>
+            <td colspan="4" class="text-center">No se encontraron pueblos</td>
+        </tr>
+    }
+</table>
+
+<a href="/ubicaciones/nuevopueblo" class="btn btn-primary">Añadir pueblo</a>
